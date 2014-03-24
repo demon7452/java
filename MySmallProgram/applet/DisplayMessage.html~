@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>Passing Strings to Java Applets</title>
+	</head>
+	<body>
+		<p>this applet gets a message from the HTML page and displays it.</p>
+		<applet
+			code = "DisplayMessageApp.class"
+			width = 200
+			height = 50
+			alt = "you must have a java 2-enabled brower to view the applet"
+		>
+			<param name = MESSAGE value = "Welcome to java"/>
+			<param name = X value = 20 />
+			<param name = Y value =30 />
+		</applet>
+	</body>
+</html>	
