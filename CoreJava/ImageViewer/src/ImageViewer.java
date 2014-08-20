@@ -14,6 +14,8 @@ import javax.swing.JMenuItem;
  * A program for viewing images
  * @version 2014-8-19
  * @author demon7452
+ * @see <a herf="www.google.com">打开谷歌</a>
+ * @see WelcomeApplet
  */
 public class ImageViewer
 {
@@ -40,7 +42,10 @@ class ImageViewerFrame extends JFrame
 	private static final int DEFAULT_WIDTH = 300;
 	private static final int DEFAULT_HEIGHT = 400;
 	
-	
+	/**
+	 * 构造方法,初始化
+	 * @param ImageViewerFrame 构造方法
+	 */
 	public ImageViewerFrame()
 	{
 		setTitle("ImageViewer");
@@ -87,6 +92,7 @@ class ImageViewerFrame extends JFrame
 //		add listener to item "exit"
 		exitItem.addActionListener(new ActionListener()
 		{
+			
 			public void actionPerformed(ActionEvent event)
 			{
 				System.exit(0);
@@ -95,3 +101,6 @@ class ImageViewerFrame extends JFrame
 		
 	}
 }
+/*Output:(55% match)
+hello it's
+*///:~
