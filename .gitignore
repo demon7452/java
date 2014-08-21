@@ -1,0 +1,10 @@
+CoreJava/ImageViewer/doc/overview-tree.html
+CoreJava/ImageViewer/doc/package-frame.html
+CoreJava/ImageViewer/doc/package-list
+*.html
+*.classpath
+*.project
+*.prefs
+*.class
+*.gif
+*.css
