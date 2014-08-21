@@ -1,10 +1,4 @@
-CoreJava/ImageViewer/doc/overview-tree.html
-CoreJava/ImageViewer/doc/package-frame.html
-CoreJava/ImageViewer/doc/package-list
-*.html
-*.classpath
-*.project
-*.prefs
-*.class
-*.gif
-*.css
+/CoreJava/ImageViewer/doc/
+/CoreJava/ImageViewer/bin/
+/JavaNetworkProgramming/ch4-NonBlockingCommunication/bin/
+/JavaNetworkProgramming/ch4-NonBlockingCommunication/doc/
