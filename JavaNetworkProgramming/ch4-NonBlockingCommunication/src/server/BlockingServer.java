@@ -78,6 +78,7 @@ public class BlockingServer
 		}
 	}
 	
+	
 	/**
 	 * main method
 	 * 调用service()方法
@@ -85,7 +86,7 @@ public class BlockingServer
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException
-	{
+	{	
 		new BlockingServer().service();
 	}
 }
@@ -132,13 +133,18 @@ class Handler implements Runnable
 			
 			String msg = null;
 
-			
+//			System.out.println("显示没!");
 			while((msg=br.readLine())!=null)//br.readLine(),读取数据
 			{
-				System.out.println(msg);
-				pw.println(echo(msg));//打印数据
+				System.out.println(br.readLine());
+				System.out.println("显示没!");//为什么不会显示?
+				
+				pw.println(echo(msg));//在客户端打印数据
 				if(msg.equals("bye"))
+				{
+					System.out.println("断开与客户端的连接!");
 					break;
+				}
 			}
 			
 //			使用SocketChannel的readLine()方法读取字符串!
@@ -197,6 +203,12 @@ class Handler implements Runnable
 		return "echo:"+msg;
 	}
 	
+	/**
+	 * SocketChannel 的方法 readLine()
+	 * @param socketChannel
+	 * @return 数据data
+	 * @throws IOException
+	 */
 	public String readLine(SocketChannel socketChannel)throws IOException
 	{
 //		存放所有读到的数据,假定一行字符串对应的字节序列的长度小于1024
