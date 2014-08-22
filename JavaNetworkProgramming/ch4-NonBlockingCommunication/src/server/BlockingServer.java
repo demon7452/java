@@ -128,10 +128,11 @@ class Handler implements Runnable
 			PrintWriter pw = getWriter(socket);
 			
 			String msg = null;
-			while((msg=br.readLine())!=null)
+//			System.out.println(br.readLine());
+			while((msg=br.readLine())!=null)//br.readLine(),读取数据
 			{
 				System.out.println(msg);
-				pw.println(echo(msg));
+				pw.println(echo(msg));//打印数据
 				if(msg.equals("bye"))
 					break;
 			}
@@ -146,7 +147,7 @@ class Handler implements Runnable
 			try 
 			{
 				if(socketChannel != null)
-					socketChannel.close();
+					socketChannel.close();//关闭数据连接
 			}
 			catch (IOException e) 
 			{
@@ -181,7 +182,7 @@ class Handler implements Runnable
 	/**
 	 * 
 	 * @param msg
-	 * @return msg
+	 * @return echo+msg
 	 */
 	public String echo(String msg)
 	{
