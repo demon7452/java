@@ -8,8 +8,11 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -129,6 +132,8 @@ class Handler implements Runnable
 			
 			String msg = null;
 //			System.out.println(br.readLine());
+//			msg = br.readLine();
+			
 			while((msg=br.readLine())!=null)//br.readLine(),读取数据
 			{
 				System.out.println(msg);
@@ -187,5 +192,55 @@ class Handler implements Runnable
 	public String echo(String msg)
 	{
 		return "echo:"+msg;
+	}
+	
+	public String readLine(SocketChannel socketChannel)throws IOException
+	{
+//		存放所有读到的数据,假定一行字符串对应的字节序列的长度小于1024
+		ByteBuffer buffer = ByteBuffer.allocate(1024);
+		
+//		存放一次读到的数据,一次只读一个字节
+		ByteBuffer  tempBuffer = ByteBuffer.allocate(1);
+		boolean isLine = false; //表示是否读到了一行字符串
+		boolean isEnd = false;  //表示是否到达了输入流的末尾
+		String data = null;
+		
+		while (!isLine && !isEnd)
+		{
+			tempBuffer.clear();  //清空缓冲区
+			
+			//在阻塞模式下,只有等到读了1个字节或者读到输入流末尾才返回;在非阻塞模式下,可能返回0
+			int n = socketChannel.read(tempBuffer);      //n=-1表示读到输入流末尾,n=0表示读入为空.
+			
+			if(n == -1)
+			{
+				isEnd = true;
+				break;//如果到达输入流的末尾,就返回null,跳出while
+			}
+			if(n == 0)
+			{
+				continue;
+			}
+			tempBuffer.flip();   //把极限设为位置,再把位置设为0
+			buffer.put(tempBuffer);        //把tempBuffer中的数据复制到buffer中
+			buffer.flip();//把极限设为位置,再把位置设为0
+			
+			Charset charset = Charset.forName("GBK");
+			CharBuffer charBuffer = charset.decode(buffer); //解码,将字节转成GBK字符
+			data = charBuffer.toString();
+			
+			if(data.indexOf("\r\n") != -1)
+			{
+				isLine = true; //读到了一行字符串
+				data = data.substring(0,data.indexOf("\r\n"));
+				break;
+			}
+			
+			buffer.position(buffer.limit());        //把位置设为极限,为下次读取数据做准备
+			buffer.limit(buffer.capacity());        //把极限设为容量,为下次读数据作准备
+		}//#while
+		//如果读入了一行字符串,就返回这行字符串,不包括行结束符"\r\n"
+		//如果到达输入流的末尾,就返回null
+		return data;
 	}
 }
