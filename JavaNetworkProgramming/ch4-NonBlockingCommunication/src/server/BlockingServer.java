@@ -131,8 +131,7 @@ class Handler implements Runnable
 			PrintWriter pw = getWriter(socket);
 			
 			String msg = null;
-//			System.out.println(br.readLine());
-//			msg = br.readLine();
+
 			
 			while((msg=br.readLine())!=null)//br.readLine(),读取数据
 			{
@@ -141,6 +140,10 @@ class Handler implements Runnable
 				if(msg.equals("bye"))
 					break;
 			}
+			
+//			使用SocketChannel的readLine()方法读取字符串!
+//			msg = readLine(socketChannel);
+//			System.out.println(msg);
 		} 
 		catch (Exception e) 
 		{
