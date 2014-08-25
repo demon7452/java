@@ -56,6 +56,9 @@ public class NonBlockingServer
 						//SocketChannel向Selector注册读就绪事件和写就绪事件
 						socketChannel.register(selector, SelectionKey.OP_READ|SelectionKey.OP_WRITE, buffer);   //关联了一个buffer附件
 						
+//						key.cancel();
+//						socketChannel.close();
+//						System.out.println("duan kai lian jie");
 					}
 					if(key.isReadable())//处理读就绪事件{}
 					{
