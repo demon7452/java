@@ -30,6 +30,8 @@ public class NonBlockingServer
 		serverSocketChannel.configureBlocking(false);//使serverSocketChannel工作于非阻塞模式
 		serverSocketChannel.socket().bind(new InetSocketAddress(port));//把服务器进程与一个本地端口绑定
 		System.out.println("服务器启动!");
+		System.out.println(SelectionKey.OP_READ|SelectionKey.OP_WRITE);
+		System.out.println(~SelectionKey.OP_READ);
 	}
 	
 	public void service() throws IOException
@@ -96,7 +98,7 @@ public class NonBlockingServer
 	
 	public void receive(SelectionKey key) throws IOException
 	{
-		System.out.println("数据可读!");
+//		System.out.println("数据可读!");
 		ByteBuffer buffer = (ByteBuffer)key.attachment();//获得与SelectionKey关联的附件
 		SocketChannel socketChannel = (SocketChannel)key.channel();//获得与SelectionKey关联的SocketChannel
 		//创建一个ByteBuffer,用于存放读到的数据
@@ -107,11 +109,11 @@ public class NonBlockingServer
 		buffer.limit(buffer.capacity());//把buffer的极限设为容量
 		//把readBuffer中的内容拷贝到buffer中,假定buffer的容量足够大,不会出现缓冲区溢出异常
 		buffer.put(readBuff);
+		System.out.println(decode(buffer));
 	}
 	
 	public void send(SelectionKey key)throws IOException
 	{
-		System.out.println("可写");
 		ByteBuffer buffer = (ByteBuffer)key.attachment();//获得与SelectionKey关联的ByteBuffer
 		SocketChannel socketChannel = (SocketChannel)key.channel();//获得与SelectionKey关联的SocketChannel
 		buffer.flip();    //把极限设为位置,把位置设为0
