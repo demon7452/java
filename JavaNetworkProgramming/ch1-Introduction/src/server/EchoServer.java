@@ -54,7 +54,7 @@ public class EchoServer
 	private PrintWriter getWriter(Socket socket)throws IOException
 	{
 		OutputStream socketOut = socket.getOutputStream();
-		return new PrintWriter(socketOut);
+		return new PrintWriter(socketOut,true);//参数true表示每写一行，PrintWriter缓存就自动溢出，把数据写到目的地。
 	}
 	
 	/**
@@ -87,16 +87,19 @@ public class EchoServer
 				
 				BufferedReader br = getReader(socket); //用br保存输入流
 				PrintWriter pw = getWriter(socket);    //用pw保存输出流
+//				pw.println("与服务器连接成功！");
+//				System.out.println("向客户端发送已连接信息！");
 				
 				String msg = null;
 				while((msg = br.readLine()) != null)   //读取输入流中的一行字符串，判断是否为空
 				{
-					System.out.println(msg);
+					System.out.println("client:"+msg);
 					
-					pw.println(echo(msg));     //向输出流中写入echo + 输入的字符串
+//					pw.println("server:"+echo(msg));     //向输出流中写入echo + 输入的字符串,写入OutputStream;
 					
 					if(msg.equals("bye"))    //如果客户发送消息为bye ，就结束通信，条出while循环
 					{
+						pw.println("通信结束，断开连接！");//向客户端发送断开连接信息！
 						break;
 					}
 				}  //#while
@@ -113,6 +116,7 @@ public class EchoServer
 					{
 						socket.close();    //如果客户连接不为空，关闭socket;
 						System.out.println("断开客户连接！");
+						
 					}
 				}
 				catch(IOException e)
