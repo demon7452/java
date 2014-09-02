@@ -1,7 +1,18 @@
+#/CoreJava 书籍java核心技术
+
+#/CoreJava/ImageViewer/
 /CoreJava/ImageViewer/doc/
 /CoreJava/ImageViewer/bin/
 
+
+#/JavaNetworkProgramming 书籍java网络编程详解
+
+#/JavaNetworkProgramming/ch1-Introduction 第一章
+/JavaNetworkProgramming/ch1-Introduction/bin/
+
+#/JavaNetworkProgramming/ch2-DetailedSocket 第二章
+/JavaNetworkProgramming/ch2-DetailedSocket/bin/
+
+#/JavaNetworkProgramming/ch4-NonBlockingCommunication 第四章
 /JavaNetworkProgramming/ch4-NonBlockingCommunication/bin/
 /JavaNetworkProgramming/ch4-NonBlockingCommunication/doc/
-
-/JavaNetworkProgramming/ch1-Introduction/bin/
