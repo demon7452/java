@@ -29,7 +29,7 @@ public class ConnectTester
 		try
 		{
 			long begin = System.currentTimeMillis();  //开始时间
-			socket = new Socket();  //创建一个socket对象
+			socket = new Socket();  //创建一个socket对象,抛出异常。
 			socket.connect(remoteAddress, 5000);   //尝试连接，连接时间为一秒
 			long end = System.currentTimeMillis();  //结束时间
 			result = "连接成功，时间：";
@@ -76,18 +76,24 @@ public class ConnectTester
 	 */
 	public static void main(String [] args)
 	{
+//		   new ConnectTester().connect("www.baidu.com", 80);
+//		   new ConnectTester().connect("www.google.com", 80);
+//		   new ConnectTester().connect("www.github.com", 80);
+		   
+		   SocketAddress test = new InetSocketAddress("www.google.com",80);
+		   System.out.println(test);
 		String host = "localhost";
-		int[] portArray  = {80,135,445,1025,1026,1027,1028,1051,1103,1104,139,33473,33449};
+//		int[] portArray  = {80,135,445,1025,1026,1027,1028,1051,1103,1104,139,33473,33449};
 		int port = 135;
-		for(int i = 0;i< portArray.length;i++)
-		{
-			port = portArray[i];
+//		for(int i = 0;i< portArray.length;i++)
+//		{
+//			port = portArray[i];
 			if(args.length > 1)
 			{
 				host = args[0];
 				port = Integer.parseInt(args[1]);
 			}
-			new ConnectTester().connect(host, port);
-		}
+//			new ConnectTester().connect(host, port);
+//		}
 	}
 }
