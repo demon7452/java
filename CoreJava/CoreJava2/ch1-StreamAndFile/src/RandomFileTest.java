@@ -143,13 +143,13 @@ class EmployeeRandom
 	public void readData(DataInput in)throws IOException
 	{
 		
-		name = DataIO.readFixedString(NAME_SIZE, in);
+		name = DataIO.readFixedString(NAME_SIZE, in);//in.skipBytes() 出错；
 		salary = in.readDouble();
-//		int year = in.readInt();   //出错了，为什么？
-//		int month = in.readInt();
-//		int day = in.readInt();
-//		GregorianCalendar calendar = new GregorianCalendar(year,month-1,day);
-//		hireDay = calendar.getTime();
+		int year = in.readInt();   //出错了，为什么？
+		int month = in.readInt();
+		int day = in.readInt();
+		GregorianCalendar calendar = new GregorianCalendar(year,month-1,day);
+		hireDay = calendar.getTime();
 	}
 }
 class DataIO
@@ -175,7 +175,7 @@ class DataIO
 			else 
 				b.append(ch);
 		}
-		in.skipBytes(2 * (size-1));
+		in.skipBytes(2 *size -2*i);//一个字符占两个字节，跳过字符串空间剩下的字节
 		return b.toString();
 	}
 	
