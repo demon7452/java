@@ -26,6 +26,9 @@ public class InetAddressTest
 			{
 				InetAddress localAddr = InetAddress.getLocalHost();//获得本地地址
 				System.out.println(localAddr);
+				System.out.println(localAddr.getAddress());
+				System.out.println(localAddr.getHostAddress());
+				System.out.println(localAddr.getHostName());
 				
 				byte[] byteAddr = localAddr.getAddress();
 				
