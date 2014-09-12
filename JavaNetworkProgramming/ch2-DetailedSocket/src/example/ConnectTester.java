@@ -77,7 +77,8 @@ public class ConnectTester
 	public static void main(String [] args)
 	{
 //		   new ConnectTester().connect("www.baidu.com", 80);
-//		   new ConnectTester().connect("www.google.com", 80);
+		   new ConnectTester().connect("www.google.com", 80);
+//		   new ConnectTester().connect("173.194.127.178", 80);//ip对应的域名是google
 //		   new ConnectTester().connect("www.github.com", 80);
 		   
 		   SocketAddress test = new InetSocketAddress("www.google.com",80);
