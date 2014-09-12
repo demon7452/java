@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 /**
  * establish a blocking server
  * use multiple threads to handle multiple connections
- * ½¨Á¢×èÈû·şÎñÆ÷,Ê¹ÓÃ¶à¸öÏß³Ì´¦Àí¶à¸öÁ¬½Ó
+ * å»ºç«‹é˜»å¡æœåŠ¡å™¨,ä½¿ç”¨å¤šä¸ªçº¿ç¨‹å¤„ç†å¤šä¸ªè¿æ¥
  * @author demon7452
  * @version 2014-8-21
  */
@@ -28,36 +28,36 @@ public class BlockingServer
 {
 	private int port = 8000;
 	private ServerSocketChannel serverSocketChannel = null;
-	private ExecutorService executorService;     //Ïß³Ì³Ø
+	private ExecutorService executorService;     //çº¿ç¨‹æ± 
 	/**
-	 * Ïß³Ì³ØÖĞ¹¤×÷Ïß³ÌµÄÊıÄ¿.
+	 * çº¿ç¨‹æ± ä¸­å·¥ä½œçº¿ç¨‹çš„æ•°ç›®.
 	 */
 	private static final int POOL_MULTIPLE = 4;
 	
 	/**
 	 * Construction method BlockingServer()
-	 * ¹¹Ôì·½·¨
+	 * æ„é€ æ–¹æ³•
 	 * @throws IOException
 	 */
 	public BlockingServer() throws IOException
 	{
-		//´´½¨Ò»¸öÏß³Ì³Ø
-		//»ñÈ¡µ±Ç°ÏµÍ³µÄCPUÊıÄ¿  int cpuNums = Runtime.getRuntime().availableProcessors();
+		//åˆ›å»ºä¸€ä¸ªçº¿ç¨‹æ± 
+		//è·å–å½“å‰ç³»ç»Ÿçš„CPUæ•°ç›®  int cpuNums = Runtime.getRuntime().availableProcessors();
 		executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*POOL_MULTIPLE);
 		
-		//´´½¨Ò»¸öServerSocketChannel¶ÔÏó
+		//åˆ›å»ºä¸€ä¸ªServerSocketChannelå¯¹è±¡
 		serverSocketChannel = ServerSocketChannel.open();
 		
-		//Ê¹µÃÔÚÍ¬Ò»¸öÖ÷»úÉÏ¹Ø±ÕÁË·şÎñÆ÷³ÌĞò,½ô½Ó×ÅÔÙÆô¶¯¸Ã·şÎñÆ÷³ÌĞòÊ±,¿ÉÒÔË³Àû°ó¶¨ÏàÍ¬µÄ¶Ë¿Ú
+		//ä½¿å¾—åœ¨åŒä¸€ä¸ªä¸»æœºä¸Šå…³é—­äº†æœåŠ¡å™¨ç¨‹åº,ç´§æ¥ç€å†å¯åŠ¨è¯¥æœåŠ¡å™¨ç¨‹åºæ—¶,å¯ä»¥é¡ºåˆ©ç»‘å®šç›¸åŒçš„ç«¯å£
 		serverSocketChannel.socket().setReuseAddress(true);
 		
-		//°Ñ·şÎñÆ÷½ø³ÌÓëÒ»¸ö±¾µØ¶Ë¿Ú°ó¶¨
+		//æŠŠæœåŠ¡å™¨è¿›ç¨‹ä¸ä¸€ä¸ªæœ¬åœ°ç«¯å£ç»‘å®š
 		serverSocketChannel.socket().bind(new InetSocketAddress(port));
-		System.out.println("·şÎñÆ÷Æô¶¯");
+		System.out.println("æœåŠ¡å™¨å¯åŠ¨");
 	}
 	
 	/**
-	 * method service() ´¦Àí¿Í»§Á¬½Ó
+	 * method service() å¤„ç†å®¢æˆ·è¿æ¥
 	 * @throws IOException
 	 */
 	public void service()
@@ -68,7 +68,7 @@ public class BlockingServer
 			try 
 			{
 				socketChannel = serverSocketChannel.accept();
-				executorService.execute(new Handler(socketChannel)) ;//´¦Àí¿Í»§Á¬½Ó	
+				executorService.execute(new Handler(socketChannel)) ;//å¤„ç†å®¢æˆ·è¿æ¥	
 			} 
 			catch (IOException e) 
 			{
@@ -81,7 +81,7 @@ public class BlockingServer
 	
 	/**
 	 * main method
-	 * µ÷ÓÃservice()·½·¨
+	 * è°ƒç”¨service()æ–¹æ³•
 	 * @param args
 	 * @throws IOException
 	 */
@@ -91,7 +91,7 @@ public class BlockingServer
 	}
 }
 /**
- * ´¦Àí¿Í»§Á¬½Ó
+ * å¤„ç†å®¢æˆ·è¿æ¥
  * @version 2014-8-21
  * @author demon7452
  *
@@ -101,7 +101,7 @@ class Handler implements Runnable
 	private SocketChannel socketChannel;
 	
 	/**
-	 * ¹¹Ôì·½·¨,´«µİSocketChannel ¶ÔÏó
+	 * æ„é€ æ–¹æ³•,ä¼ é€’SocketChannel å¯¹è±¡
 	 * @param socketChannel
 	 */
 	public Handler (SocketChannel socketChannel)
@@ -125,29 +125,29 @@ class Handler implements Runnable
 	{
 		try 
 		{
-			Socket socket = socketChannel.socket(); //»ñµÃÓësocketChannel¹ØÁªµÄSocket¶ÔÏó
-			System.out.println("½ÓÊÕµ½¿Í»§Á¬½Ó,À´×Ô:"+socket.getInetAddress()+":"+socket.getPort());
+			Socket socket = socketChannel.socket(); //è·å¾—ä¸socketChannelå…³è”çš„Socketå¯¹è±¡
+			System.out.println("æ¥æ”¶åˆ°å®¢æˆ·è¿æ¥,æ¥è‡ª:"+socket.getInetAddress()+":"+socket.getPort());
 			
 			BufferedReader br = getReader(socket);
 			PrintWriter pw = getWriter(socket);
 			
 			String msg = null;
 
-//			System.out.println("ÏÔÊ¾Ã»!");
-			while((msg=br.readLine())!=null)//br.readLine(),¶ÁÈ¡Êı¾İ
+//			System.out.println("æ˜¾ç¤ºæ²¡!");
+			while((msg=br.readLine())!=null)//br.readLine(),è¯»å–æ•°æ®
 			{
 				System.out.println(br.readLine());
-				System.out.println("ÏÔÊ¾Ã»!");//ÎªÊ²Ã´²»»áÏÔÊ¾?
+//				System.out.println("æ˜¾ç¤ºæ²¡!");//ä¸ºä»€ä¹ˆä¸ä¼šæ˜¾ç¤º?
 				
-				pw.println(echo(msg));//ÔÚ¿Í»§¶Ë´òÓ¡Êı¾İ
+				pw.println(echo(msg));//åœ¨å®¢æˆ·ç«¯æ‰“å°æ•°æ®
 				if(msg.equals("bye"))
 				{
-					System.out.println("¶Ï¿ªÓë¿Í»§¶ËµÄÁ¬½Ó!");
+					System.out.println("æ–­å¼€ä¸å®¢æˆ·ç«¯çš„è¿æ¥!");
 					break;
 				}
 			}
 			
-//			Ê¹ÓÃSocketChannelµÄreadLine()·½·¨¶ÁÈ¡×Ö·û´®!
+//			ä½¿ç”¨SocketChannelçš„readLine()æ–¹æ³•è¯»å–å­—ç¬¦ä¸²!
 //			msg = readLine(socketChannel);
 //			System.out.println(msg);
 		} 
@@ -161,7 +161,7 @@ class Handler implements Runnable
 			try 
 			{
 				if(socketChannel != null)
-					socketChannel.close();//¹Ø±ÕÊı¾İÁ¬½Ó
+					socketChannel.close();//å…³é—­æ•°æ®è¿æ¥
 			}
 			catch (IOException e) 
 			{
@@ -174,7 +174,7 @@ class Handler implements Runnable
 	/**
 	 * 
 	 * @param socket
-	 * @return Ğ´³ö
+	 * @return å†™å‡º
 	 * @throws IOException
 	 */
 	private  PrintWriter getWriter(Socket socket) throws IOException 
@@ -185,7 +185,7 @@ class Handler implements Runnable
 	/**
 	 * 
 	 * @param socket
-	 * @return ÊäÈëµÄ×Ö·û
+	 * @return è¾“å…¥çš„å­—ç¬¦
 	 * @throws IOException
 	 */
 	private BufferedReader getReader (Socket socket) throws IOException
@@ -204,58 +204,58 @@ class Handler implements Runnable
 	}
 	
 	/**
-	 * SocketChannel µÄ·½·¨ readLine()
+	 * SocketChannel çš„æ–¹æ³• readLine()
 	 * @param socketChannel
-	 * @return Êı¾İdata
+	 * @return æ•°æ®data
 	 * @throws IOException
 	 */
 	public String readLine(SocketChannel socketChannel)throws IOException
 	{
-//		´æ·ÅËùÓĞ¶Áµ½µÄÊı¾İ,¼Ù¶¨Ò»ĞĞ×Ö·û´®¶ÔÓ¦µÄ×Ö½ÚĞòÁĞµÄ³¤¶ÈĞ¡ÓÚ1024
+//		å­˜æ”¾æ‰€æœ‰è¯»åˆ°çš„æ•°æ®,å‡å®šä¸€è¡Œå­—ç¬¦ä¸²å¯¹åº”çš„å­—èŠ‚åºåˆ—çš„é•¿åº¦å°äº1024
 		ByteBuffer buffer = ByteBuffer.allocate(1024);
 		
-//		´æ·ÅÒ»´Î¶Áµ½µÄÊı¾İ,Ò»´ÎÖ»¶ÁÒ»¸ö×Ö½Ú
+//		å­˜æ”¾ä¸€æ¬¡è¯»åˆ°çš„æ•°æ®,ä¸€æ¬¡åªè¯»ä¸€ä¸ªå­—èŠ‚
 		ByteBuffer  tempBuffer = ByteBuffer.allocate(1);
-		boolean isLine = false; //±íÊ¾ÊÇ·ñ¶Áµ½ÁËÒ»ĞĞ×Ö·û´®
-		boolean isEnd = false;  //±íÊ¾ÊÇ·ñµ½´ïÁËÊäÈëÁ÷µÄÄ©Î²
+		boolean isLine = false; //è¡¨ç¤ºæ˜¯å¦è¯»åˆ°äº†ä¸€è¡Œå­—ç¬¦ä¸²
+		boolean isEnd = false;  //è¡¨ç¤ºæ˜¯å¦åˆ°è¾¾äº†è¾“å…¥æµçš„æœ«å°¾
 		String data = null;
 		
 		while (!isLine && !isEnd)
 		{
-			tempBuffer.clear();  //Çå¿Õ»º³åÇø
+			tempBuffer.clear();  //æ¸…ç©ºç¼“å†²åŒº
 			
-			//ÔÚ×èÈûÄ£Ê½ÏÂ,Ö»ÓĞµÈµ½¶ÁÁË1¸ö×Ö½Ú»òÕß¶Áµ½ÊäÈëÁ÷Ä©Î²²Å·µ»Ø;ÔÚ·Ç×èÈûÄ£Ê½ÏÂ,¿ÉÄÜ·µ»Ø0
-			int n = socketChannel.read(tempBuffer);      //n=-1±íÊ¾¶Áµ½ÊäÈëÁ÷Ä©Î²,n=0±íÊ¾¶ÁÈëÎª¿Õ.
+			//åœ¨é˜»å¡æ¨¡å¼ä¸‹,åªæœ‰ç­‰åˆ°è¯»äº†1ä¸ªå­—èŠ‚æˆ–è€…è¯»åˆ°è¾“å…¥æµæœ«å°¾æ‰è¿”å›;åœ¨éé˜»å¡æ¨¡å¼ä¸‹,å¯èƒ½è¿”å›0
+			int n = socketChannel.read(tempBuffer);      //n=-1è¡¨ç¤ºè¯»åˆ°è¾“å…¥æµæœ«å°¾,n=0è¡¨ç¤ºè¯»å…¥ä¸ºç©º.
 			
 			if(n == -1)
 			{
 				isEnd = true;
-				break;//Èç¹ûµ½´ïÊäÈëÁ÷µÄÄ©Î²,¾Í·µ»Ønull,Ìø³öwhile
+				break;//å¦‚æœåˆ°è¾¾è¾“å…¥æµçš„æœ«å°¾,å°±è¿”å›null,è·³å‡ºwhile
 			}
 			if(n == 0)
 			{
 				continue;
 			}
-			tempBuffer.flip();   //°Ñ¼«ÏŞÉèÎªÎ»ÖÃ,ÔÙ°ÑÎ»ÖÃÉèÎª0
-			buffer.put(tempBuffer);        //°ÑtempBufferÖĞµÄÊı¾İ¸´ÖÆµ½bufferÖĞ
-			buffer.flip();//°Ñ¼«ÏŞÉèÎªÎ»ÖÃ,ÔÙ°ÑÎ»ÖÃÉèÎª0
+			tempBuffer.flip();   //æŠŠæé™è®¾ä¸ºä½ç½®,å†æŠŠä½ç½®è®¾ä¸º0
+			buffer.put(tempBuffer);        //æŠŠtempBufferä¸­çš„æ•°æ®å¤åˆ¶åˆ°bufferä¸­
+			buffer.flip();//æŠŠæé™è®¾ä¸ºä½ç½®,å†æŠŠä½ç½®è®¾ä¸º0
 			
 			Charset charset = Charset.forName("GBK");
-			CharBuffer charBuffer = charset.decode(buffer); //½âÂë,½«×Ö½Ú×ª³ÉGBK×Ö·û
+			CharBuffer charBuffer = charset.decode(buffer); //è§£ç ,å°†å­—èŠ‚è½¬æˆGBKå­—ç¬¦
 			data = charBuffer.toString();
 			
 			if(data.indexOf("\r\n") != -1)
 			{
-				isLine = true; //¶Áµ½ÁËÒ»ĞĞ×Ö·û´®
+				isLine = true; //è¯»åˆ°äº†ä¸€è¡Œå­—ç¬¦ä¸²
 				data = data.substring(0,data.indexOf("\r\n"));
 				break;
 			}
 			
-			buffer.position(buffer.limit());        //°ÑÎ»ÖÃÉèÎª¼«ÏŞ,ÎªÏÂ´Î¶ÁÈ¡Êı¾İ×ö×¼±¸
-			buffer.limit(buffer.capacity());        //°Ñ¼«ÏŞÉèÎªÈİÁ¿,ÎªÏÂ´Î¶ÁÊı¾İ×÷×¼±¸
+			buffer.position(buffer.limit());        //æŠŠä½ç½®è®¾ä¸ºæé™,ä¸ºä¸‹æ¬¡è¯»å–æ•°æ®åšå‡†å¤‡
+			buffer.limit(buffer.capacity());        //æŠŠæé™è®¾ä¸ºå®¹é‡,ä¸ºä¸‹æ¬¡è¯»æ•°æ®ä½œå‡†å¤‡
 		}//#while
-		//Èç¹û¶ÁÈëÁËÒ»ĞĞ×Ö·û´®,¾Í·µ»ØÕâĞĞ×Ö·û´®,²»°üÀ¨ĞĞ½áÊø·û"\r\n"
-		//Èç¹ûµ½´ïÊäÈëÁ÷µÄÄ©Î²,¾Í·µ»Ønull
+		//å¦‚æœè¯»å…¥äº†ä¸€è¡Œå­—ç¬¦ä¸²,å°±è¿”å›è¿™è¡Œå­—ç¬¦ä¸²,ä¸åŒ…æ‹¬è¡Œç»“æŸç¬¦"\r\n"
+		//å¦‚æœåˆ°è¾¾è¾“å…¥æµçš„æœ«å°¾,å°±è¿”å›null
 		return data;
 	}
 }
