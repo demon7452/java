@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -89,7 +88,7 @@ class InterruptibleSocketFrame extends JFrame
 					counter++;
 					if(counter <=10)
 						out.println(counter);
-					Thread.sleep(100);
+					Thread.sleep(100);//等待10s后断开连接？
 				}
 				incoming.close();
 				textArea.append("Closing server\n");
@@ -183,9 +182,31 @@ class InterruptibleSocketFrame extends JFrame
 		{
 			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				// TODO Auto-generated method stub
-				
+				interruptibleButton.setEnabled(false);
+				blockingButton.setEnabled(false);
+				cancleButton.setEnabled(true);
+				connectThread = new Thread(new Runnable()
+				{
+					
+					@Override
+					public void run() 
+					{
+						// TODO Auto-generated method stub
+						try 
+						{
+							connectBlocking();
+						} catch (IOException e)
+						{
+							// TODO: handle exception
+							textArea.append("\nInterruptibleSocketTest.connectBlocking:"+e);
+						}
+						
+					}
+				});
+				connectThread.start();
 			}
 		});	
 		cancleButton.addActionListener(
@@ -193,26 +214,35 @@ class InterruptibleSocketFrame extends JFrame
 		{
 			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				// TODO Auto-generated method stub
+				connectThread.interrupt();//中断套接字！
+				cancleButton.setEnabled(false);
 				
 			}
 		});
+		//建立服务器，绑定端口8189
+		server = new TestServer();
+		new Thread(server).start();
 	}
 	/**
 	 * Connects to the test server, using interruptible I/O
+	 * SocketChannel可中断套接字：无论是正在读写数据还是在阻塞中
+	 * 都可以使用interrupt来解除阻塞。
 	 * @throws IOException
 	 */
 	public void connectInterruptibly()throws IOException
 	{
 		textArea.append("Interruptible:\n");
+		//尝试和本地端口8189连接，会抛出异常……
 		SocketChannel channel = SocketChannel.open(new InetSocketAddress("localhost",8189));
 		try 
 		{
 			in = new Scanner(channel);
 			while(!Thread.currentThread().isInterrupted())
 			{
-				textArea.append("Reading ");
+				textArea.append("Reading");
 				if(in.hasNextLine())
 				{
 					String lineString = in.nextLine();
@@ -223,13 +253,14 @@ class InterruptibleSocketFrame extends JFrame
 		finally
 		{
 			channel.close();
+
 			EventQueue.invokeLater(new Runnable() 
 			{	
 				@Override
 				public void run() 
 				{
 					// TODO Auto-generated method stub
-					textArea.append("channel closed\n");
+					textArea.append("\nchannel closed\n");
 					interruptibleButton.setEnabled(true);
 					blockingButton.setEnabled(true);
 				}
@@ -238,6 +269,9 @@ class InterruptibleSocketFrame extends JFrame
 	}
 	/**
 	 * connects to the test server,using blocking I/O
+	 * Socket套接字：正在读写数据时可以使用interrupt来解除阻塞；
+	 * 但是在阻塞中时，不能使用interrupt来解除阻塞，
+	 * 只能等到服务器最终关闭连接时解除阻塞！
 	 * @throws IOException
 	 */
 	public void connectBlocking() throws IOException
@@ -275,38 +309,3 @@ class InterruptibleSocketFrame extends JFrame
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
