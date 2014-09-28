@@ -88,7 +88,7 @@ class InterruptibleSocketFrame extends JFrame
 					counter++;
 					if(counter <=10)
 						out.println(counter);
-					Thread.sleep(100);//等待10s后断开连接？
+					Thread.sleep(100);//线程放弃cpu,睡眠100ms=0.1s,然后继续恢复运行
 				}
 				incoming.close();
 				textArea.append("Closing server\n");
