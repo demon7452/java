@@ -1,7 +1,11 @@
 package io.github.demon7452.BufferBasics;
 
 import java.nio.ByteBuffer;
-
+/**
+ * learning the buffer basics and make a test
+ * @author demon7452
+ * @version 2014-9-29
+ */
 public class BufferBasics 
 {
 	public static void main(String[] args) 
