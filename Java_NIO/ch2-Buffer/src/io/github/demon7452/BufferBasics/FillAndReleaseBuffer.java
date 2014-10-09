@@ -1,6 +1,7 @@
 package io.github.demon7452.BufferBasics;
 
 import java.nio.BufferOverflowException;
+import java.nio.ByteOrder;
 import java.nio.CharBuffer;
 /**
  * Buffer fill/drain example. this code uses the simplest 
@@ -24,6 +25,9 @@ public class FillAndReleaseBuffer
 	 */
 	public static void main(String[] args) 
 	{
+		ByteOrder bOrder = ByteOrder.nativeOrder();
+		String string = bOrder.toString();
+		System.out.println(string);
 		// TODO Auto-generated method stub
 		CharBuffer buffer = CharBuffer.allocate(100);//设定缓冲池大小为100
 		while(fillBuffer(buffer))
