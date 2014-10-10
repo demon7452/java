@@ -1,0 +1,1 @@
+int number = 1;System.out.print(number); (No explicit return value)
