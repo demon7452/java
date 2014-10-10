@@ -18,5 +18,9 @@ public class DebugTest
 			// TODO: handle exception
 		}
 	}
+	public void print()
+	{
+		System.out.println("JUnit test!");
+	}
 
 }
