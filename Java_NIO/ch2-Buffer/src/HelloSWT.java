@@ -35,7 +35,6 @@ public class HelloSWT
 		
 		shell.setSize(200, 200);
 		shell.open();
-
 		while(!shell.isDisposed())
 		{
 			//销毁资源
