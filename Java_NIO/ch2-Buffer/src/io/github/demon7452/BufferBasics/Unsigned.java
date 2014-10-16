@@ -19,20 +19,46 @@ import java.nio.ByteBuffer;
  */
 public class Unsigned
 {
+	//获得无符号Byte型；
 	public static short getUnsignedByte (ByteBuffer buffer)
 	{
 		return ((short)(buffer.get() & 0xff));
+	}
+	
+	public static short getUnsignedByte (ByteBuffer buffer , int position)
+	{
+		return ((short)(buffer.get(position) & 0xff));
 	}
 	
 	public static void putUnsignedByte(ByteBuffer buffer, short value)
 	{
 		buffer.put((byte)(value & 0xff));
 	}
-
-	public static void main(String[] args)
+	
+	public static void putUnsignedByte(ByteBuffer buffer, short value, int position)
 	{
-		// TODO Auto-generated method stub
+		buffer.put(position, (byte)(value & 0xff));
+	}
 
+	//获得无符号short型；
+	public static int getUnsignedShort (ByteBuffer buffer)
+	{
+		return ((int)(buffer.getShort() & 0xff));
+	}
+	
+	public static int getUnsignedShort (ByteBuffer buffer , int position)
+	{
+		return ((int)(buffer.getShort(position) & 0xff));
+	}
+	
+	public static void putUnsignedShort(ByteBuffer buffer, int value)
+	{
+		buffer.putShort((short)(value & 0xff));
+	}
+	
+	public static void putUnsignedShort(ByteBuffer buffer, int value, int position)
+	{
+		buffer.putShort(position, (short)(value & 0xff));
 	}
 
 }
