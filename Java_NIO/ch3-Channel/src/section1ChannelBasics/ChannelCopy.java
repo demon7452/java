@@ -45,12 +45,12 @@ public class ChannelCopy
 	private static void channelCopy1 (ReadableByteChannel src,WritableByteChannel dest) throws IOException
 	{
 		ByteBuffer buffer = ByteBuffer.allocateDirect(4);
-		while(src.read(buffer) != -1)
+		while(src.read(buffer) != -1)//src.read(buffer),从src通道中读取数据写入buffer中
 		{
 			//Prepare the buffer to be drained
 			buffer.flip();
 			//write to the channel; may block
-			int st = dest.write(buffer);
+			int st = dest.write(buffer);//dest.write(buffer),从buffer中读取数据写入dest通道中
 			System.out.println(st);
 			//if partial transfer , shift remainder down
 			//if buffer is empty , same as doing clear();
