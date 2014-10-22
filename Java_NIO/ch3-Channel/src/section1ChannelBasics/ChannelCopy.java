@@ -1,4 +1,4 @@
-package ch3.ChannelBasics;
+package section1ChannelBasics;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
