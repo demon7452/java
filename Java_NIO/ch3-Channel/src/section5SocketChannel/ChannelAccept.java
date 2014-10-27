@@ -41,7 +41,6 @@ public class ChannelAccept
 			System.out.println("waiting for connection");
 			//网络发来连接请求，返回一个表示连接已经建立的socket对象
 			SocketChannel sc = ssc.accept();
-			
 			if(sc == null)
 			{
 				//no connections, snooze a while 2000ms=2s
@@ -50,13 +49,16 @@ public class ChannelAccept
 			else
 			{
 				//输出连接来的地址
+				System.out.println((sc.isConnected()? "connect":"no"));
 				System.out.println("Incoming connection from: " + sc.socket().getRemoteSocketAddress());
 				
 				buffer.rewind();//倒回，position 设为0，limit不变
 				System.out.println(buffer.position());
 				System.out.println(buffer.limit());
 				sc.write(buffer);//从缓冲区向通道中写入数据，传递到连接来的socket终端
+				System.out.println((sc.isConnected()? "connect":"no"));
 				sc.close();
+				System.out.println((sc.isConnected()? "connect":"no"));
 			}
 		}
 	}
