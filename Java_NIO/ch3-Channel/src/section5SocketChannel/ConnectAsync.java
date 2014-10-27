@@ -1,6 +1,9 @@
 package section5SocketChannel;
 
+import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.net.InetSocketAddress;
+import java.nio.channels.IllegalBlockingModeException;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -28,6 +31,17 @@ public class ConnectAsync
 		sc.configureBlocking(false);
 		System.out.println("Initiating connection");
 		sc.connect(addr);
+		//测试连接超时，失败！设定阻塞时间。
+//		try
+//		{
+//			sc.socket().connect(addr, 19000); 
+//		}
+//		catch (IllegalBlockingModeException e)
+//		{
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+			
 		while(!sc.finishConnect())
 		{
 			System.out.println("尚未完成连接！！");
