@@ -18,3 +18,6 @@
 /JavaNetworkProgramming/ch4-NonBlockingCommunication/doc/
 
 .classpath
+.project
+*/*/.gradle/*
+*/*/.settings/*
