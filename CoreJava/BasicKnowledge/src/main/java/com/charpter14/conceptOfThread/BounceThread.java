@@ -13,12 +13,11 @@ public class BounceThread {
 	public static void main(String[] args) {
 		//创建一个线程并运行
 		EventQueue.invokeLater(new Runnable() {
-			
 			@Override
 			public void run() {
 				JFrame frame = new BounceFrame2();
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setVisible(true);				
+				frame.setVisible(true);
 			}
 		});
 	}
@@ -68,6 +67,7 @@ class BounceFrame2 extends JFrame
 	public static final int DEFAULT_HEIGHT = 350;
 	public static final int STEPS = 1000;
 	public static final int DELAY = 3;
+	private int count = 1;
 	public BounceFrame2()
 	{
 		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
@@ -94,6 +94,13 @@ class BounceFrame2 extends JFrame
 			}
 		});
 		
+		addButton(buttonPanel, "thread", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(Thread.currentThread().getName());
+			}
+		});
+		
 		add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
@@ -117,6 +124,8 @@ class BounceFrame2 extends JFrame
 		ballComponent.add(ball);
 		Runnable runnable = new BallRunnable(ball,ballComponent);
 		Thread thread = new Thread(runnable);
+		thread.setName("thread_"+count);
+		count++;
 		thread.start();
 	}
 	
