@@ -2,12 +2,26 @@ package com.charpter14.conceptOfThread;
 
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
-
+import java.util.Random;
 public class Ball {
 	private static final int XSIZE = 15;
 	private static final int YSIZE = 15;
 	private double x = 0;
-	private double y = 0;
+	private double y = 0;	
+	private double dx = 1;
+	private double dy = 1;
+	
+	public Ball()
+	{
+	}
+	
+	public Ball(Rectangle2D bounds)
+	{
+		Random random = new Random();
+		this.x = random.nextInt((int)bounds.getMaxY());
+		this.y = random.nextInt((int)bounds.getMaxY());
+	}
+	
 	public double getX() {
 		return x;
 	}
@@ -23,9 +37,6 @@ public class Ball {
 	public void setY(double y) {
 		this.y = y;
 	}
-
-	private double dx = 1;
-	private double dy = 1;
 
 	/**
 	 * Moves the ball to the next position, reversing direction if it hits one of the edges

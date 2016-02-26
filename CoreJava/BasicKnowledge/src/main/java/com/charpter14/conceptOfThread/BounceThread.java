@@ -1,6 +1,6 @@
 package com.charpter14.conceptOfThread;
-
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -8,23 +8,56 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-public class Bounce {
-	public static void main(String[] args)
-	{
+public class BounceThread {
+
+	public static void main(String[] args) {
 		//创建一个线程并运行
 		EventQueue.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
-				JFrame frame = new BounceFrame();
+				JFrame frame = new BounceFrame2();
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);				
 			}
 		});
 	}
+
 }
 
-class BounceFrame extends JFrame
+/**
+ * A runnable that animates a bouncing ball
+ * @author dev3
+ *
+ */
+class BallRunnable implements Runnable 
+{
+	private Ball ball;
+	private Component component;
+	public static final int STEPS = 1000;
+	public static final int DELAY = 3;
+	
+	public BallRunnable(Ball ball,Component component) {
+		this.ball = ball;
+		this.component = component;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			for(int i = 0; i <= STEPS; i++)
+			{
+				ball.move(component.getBounds());
+				component.repaint();
+				Thread.sleep(DELAY);
+			}
+		} catch (InterruptedException e) {
+		}
+	}
+	
+}
+
+class BounceFrame2 extends JFrame
 {
 	/**
 	 * 
@@ -35,11 +68,7 @@ class BounceFrame extends JFrame
 	public static final int DEFAULT_HEIGHT = 350;
 	public static final int STEPS = 1000;
 	public static final int DELAY = 3;
-	
-	private double x = 0;
-	private double y = 0;
-	
-	public BounceFrame()
+	public BounceFrame2()
 	{
 		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
 		setTitle("Bounce");
@@ -84,24 +113,11 @@ class BounceFrame extends JFrame
 	
 	public void addBall()
 	{
-		try {
-			Ball ball = new Ball();
-			ball.setX(x);
-			ball.setY(y);
-			System.out.println(ball.getX() +"   " + ball.getY());
-			ballComponent.add(ball);
-			for(int i = 1; i <= STEPS; i++)
-			{
-				ball.move(ballComponent.getBounds());
-				ballComponent.paint(ballComponent.getGraphics());
-				Thread.sleep(DELAY);//暂停毫秒数
-			}
-			x = ball.getX();
-			y = ball.getY();
-			System.out.println(ball.getX() +"   " + ball.getY());
-		} catch (InterruptedException e) {
-			// TODO: handle exception
-		}
+		Ball ball = new Ball(ballComponent.getBounds());
+		ballComponent.add(ball);
+		Runnable runnable = new BallRunnable(ball,ballComponent);
+		Thread thread = new Thread(runnable);
+		thread.start();
 	}
 	
 }
