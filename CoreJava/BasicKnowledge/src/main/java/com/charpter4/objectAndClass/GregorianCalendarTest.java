@@ -1,7 +1,8 @@
 package com.charpter4.objectAndClass;
-
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class GregorianCalendarTest {
@@ -16,6 +17,9 @@ public class GregorianCalendarTest {
 //		printAllDaysOfOneMonth(calendar1);
 		printAllDaysOfOneMonth(calendar2);
 		printAllDaysOfOneMonth(new GregorianCalendar(2016,Calendar.JULY,11));
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(simpleDateFormat.format(date));
 	}
 	
 	public static void printAllDaysOfOneMonth(GregorianCalendar calendar){
