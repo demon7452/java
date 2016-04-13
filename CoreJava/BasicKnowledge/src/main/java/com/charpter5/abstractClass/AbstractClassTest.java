@@ -14,11 +14,13 @@ public class AbstractClassTest {
 	    }
 	};
 	
-	persons[1] = new Student("A");
+	persons[1] = new Student("A",11);
 	persons[2] = new Employee("B");
 	for(Person person : persons)
 	{
 	    System.out.println(person.getDescription());
+	    System.out.println(person.toString());
+	    System.out.println("the current position is "+person);
 	}
     }
 
