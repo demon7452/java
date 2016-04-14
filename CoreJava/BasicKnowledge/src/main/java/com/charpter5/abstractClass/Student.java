@@ -1,6 +1,6 @@
 package com.charpter5.abstractClass;
 
-public class Student extends Person{
+public class Student extends Person implements Comparable<Student>{
 
 	private int studentId;
     public Student(String name,int studentId) {
@@ -45,5 +45,14 @@ public class Student extends Person{
 
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
+	}
+
+	@Override
+	public int compareTo(Student o) {
+		if(studentId > o.studentId)
+			return 1;
+		if(studentId < o.studentId)
+			return -1;
+		return 0;
 	}
 }

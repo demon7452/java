@@ -16,8 +16,8 @@ public class VariableParameterTest {
 	 * 
 	 * 可以传入任意几个参数
 	 * 获取最大值
-	 * @param vlaues
-	 * @return
+	 * @param vlaues 传入参数
+	 * @return 返回double
 	 */
 	public static double getMax(double... vlaues ) {
 		double max = Double.MIN_VALUE;
