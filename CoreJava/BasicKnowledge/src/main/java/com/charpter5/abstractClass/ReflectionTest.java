@@ -4,11 +4,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.sql.Date;
-import java.util.Scanner;
 
 /**
- * 利用反射分析类的能力
+ * ?????????????????
  * @author demon7452
  * 
  *
@@ -26,11 +24,16 @@ public class ReflectionTest {
 //			className = in.next();
 //			in.close();
 //		}
+//		System.exit(0);
+		printClass(className);
+	}
+
+	public static void printClass(String className){
 		System.out.println(className);
 		try {
 			Class class1 = Class.forName(className);
 			Class superCl = class1.getSuperclass();
-			String modifiers = Modifier.toString(class1.getModifiers());//获得类的修饰符
+			String modifiers = Modifier.toString(class1.getModifiers());//???????????
 			if(modifiers.length() > 0)
 				System.out.print(modifiers + " ");
 			System.out.print("class " + className);
@@ -43,15 +46,14 @@ public class ReflectionTest {
 			printConstructors(class1);
 			System.out.println();
 			printMethods(class1);
-			System.out.print("}");
+			System.out.println("}");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.exit(0);
 	}
-
+	
 	/**
-	 * 打印类的 域
+	 * ?????? ??
 	 * @param class1
 	 */
 	private static void  printFields(Class class1) {
@@ -65,7 +67,7 @@ public class ReflectionTest {
 	}
 	
 	/**
-	 * 打印构造函数
+	 * ?????????
 	 * @param class1
 	 */
 	private static void printConstructors(Class class1){
@@ -99,7 +101,7 @@ public class ReflectionTest {
 		}
 	}
 	/**
-	 * 打印声明类型
+	 * ???????????
 	 * @param mod
 	 */
 	private static void printModifiers(int mod){
