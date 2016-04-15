@@ -1,10 +1,8 @@
 package com.charpter6.interfaceAndInnerClass;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import com.charpter5.abstractClass.Student;
 
 /**
