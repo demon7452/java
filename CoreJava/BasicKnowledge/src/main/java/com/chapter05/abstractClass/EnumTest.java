@@ -28,7 +28,7 @@ enum Size{
 }
 
 enum Size2{
-	LARGE("��"),MEDIUM("��"),SMALL("С");
+	LARGE("大"),MEDIUM("中"),SMALL("小");
 	private String desc;
 	private Size2(String desc){
 		this.desc = desc;
@@ -55,11 +55,11 @@ enum Size2{
 		if(null == desc)
 			return null;
 		switch (desc) {
-		case "��":
+		case "大":
 			return LARGE;
-		case "��":
+		case "中":
 			return MEDIUM;
-		case "С":
+		case "小":
 			return SMALL;
 		default:
 			return null;

@@ -9,7 +9,7 @@ public class TestSynchronous {
 	
 //	private Condition condition = myLock.newCondition();
 
-	ExecutorService
+//	ExecutorService
 	public static void main(String[] args)
 	{
 

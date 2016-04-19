@@ -4,9 +4,6 @@ import java.io.Console;
 import java.util.Scanner;
 
 import org.junit.Test;
-
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
-
 /**
  * java 基本的程序设计结构，基本数据类型
  * @author xiong.li
