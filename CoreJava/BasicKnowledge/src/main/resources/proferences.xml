@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<preferences EXTERNAL_XML_VERSION="1.0">
+  <root type="user">
+    <map>
+      <entry key="JetBrains.UserIdOnMachine" value="d77be1ff-7ca9-46f4-875c-2ed5a5cedafa"/>
+      <entry key="JetBrains.idea.15b10819.evlsprt3.14" value="-15"/>
+      <entry key="A" value="testA"/>
+      <entry key="one" value="1"/>
+      <entry key="boolean" value="true"/>
+    </map>
+    <node name="test">
+      <map>
+        <entry key="A" value="testA"/>
+        <entry key="one" value="1"/>
+        <entry key="test" value="test"/>
+      </map>
+    </node>
+    <node name="test2">
+      <map>
+        <entry key="test" value="test"/>
+      </map>
+    </node>
+  </root>
+</preferences>
