@@ -56,8 +56,8 @@ class PropertiesFrame extends JFrame{
 		defaultProperties.put("width","300");
 		defaultProperties.put("height","300");
 		defaultProperties.put("title", "");
-		Properties settings = new Properties(defaultProperties);
-		File propertiesFile = new File("src/main/resources/program.properties");
+		final Properties settings = new Properties(defaultProperties);
+		final File propertiesFile = new File("src/main/resources/program.properties");
 		if(propertiesFile.exists()){
 			try {
 				FileInputStream inputStream = new FileInputStream(propertiesFile);

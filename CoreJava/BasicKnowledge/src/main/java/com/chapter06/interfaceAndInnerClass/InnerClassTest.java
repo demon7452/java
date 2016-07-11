@@ -54,7 +54,7 @@ class TalkingClock{
 	 * @param interval
 	 * @param isBeep
 	 */
-	public static void start(int interval,final boolean isBeep){
+	public static void start(final int interval,final boolean isBeep){
 		class TimePrinter2 implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
