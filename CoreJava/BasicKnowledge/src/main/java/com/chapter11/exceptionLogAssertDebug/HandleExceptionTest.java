@@ -2,6 +2,8 @@ package com.chapter11.exceptionLogAssertDebug;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 异常处理
@@ -13,6 +15,18 @@ public class HandleExceptionTest {
 	private static FileInputStream fileInputStream;
 
 	public static void main(String[] args) {
+		List<Integer> nuls = new ArrayList<Integer>();
+		nuls.add(1);
+		nuls.add(2);
+		boolean test = true;
+		for(Integer integer : nuls){
+			System.out.println(integer);
+			if(test){
+				if(1== integer)
+					continue;
+			}
+			System.out.println("end");
+		}
 		try {
 			throwException();
 		} catch (Exception e) {
