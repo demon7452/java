@@ -11,10 +11,13 @@ package com.chapter12.genericProgramDesign;
 public class PairTest {
 
     public static void main(String[] args) {
-        String[] arrStrings = {"b","bd","d","w","zafd"};
+        String[] arrStrings = {"b","bd","d","w","zafd","fb"};
         Pair<String> pair = ArrayAlg.minMax(arrStrings);
         System.out.println(pair.getFirst());
         System.out.println(pair.getSecond());
+        
+        String middle = ArrayAlg.getMiddle(arrStrings);
+        System.out.println(middle);
     }
 
 }
@@ -33,5 +36,9 @@ class ArrayAlg{
         pair.setFirst(min);
         pair.setSecond(max);
         return pair;
+    }
+    
+    public static <T> T getMiddle(T[] array){
+        return array[array.length/2];
     }
 }
