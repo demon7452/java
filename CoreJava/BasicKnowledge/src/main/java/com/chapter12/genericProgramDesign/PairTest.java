@@ -1,4 +1,7 @@
 package com.chapter12.genericProgramDesign;
+
+import java.io.Serializable;
+
 /**
  * 
  * Function: Generic class test
@@ -16,7 +19,8 @@ public class PairTest {
         System.out.println(pair.getFirst());
         System.out.println(pair.getSecond());
         
-        String middle = ArrayAlg.getMiddle(arrStrings);
+        String middle = ArrayAlg.<String>getMiddle(arrStrings);
+        ArrayAlg.<String>getMiddle(arrStrings);
         System.out.println(middle);
     }
 
@@ -40,5 +44,16 @@ class ArrayAlg{
     
     public static <T> T getMiddle(T[] array){
         return array[array.length/2];
+    }
+    
+    public static <T extends Comparable<T> & Serializable> T getMin(T[] array){
+        if(null == array || 0 == array.length)
+            return null;
+        T min = array[0];
+        for(T e : array){
+            if(min.compareTo(e) > 0)
+                min = e;
+        }
+        return min;
     }
 }
