@@ -15,11 +15,8 @@ import java.util.Arrays;
  * 泛型反射测试
  *
  * @author   lixiong
- * @Date	 2016年10月26日		下午3:15:44
- *
- * @see
  */
-public class GenericRelectionTest {
+public class GenericReflectionTest {
 
     public static void main(String[] args) {
         try {
