@@ -13,6 +13,7 @@ public class MyException extends IOException{
 	private static final long serialVersionUID = -2471097392298352602L;
 
 	public MyException(){
+		super();
 	}
 	
 	public MyException(String message){
