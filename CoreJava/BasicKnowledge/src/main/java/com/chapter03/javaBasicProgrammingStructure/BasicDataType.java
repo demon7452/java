@@ -78,7 +78,7 @@ public class BasicDataType
 	}
 	
 	@Test
-	public void testInlput()
+	public void testInput()
 	{
 		Scanner scanner = new Scanner(System.in);
 		
