@@ -40,22 +40,22 @@ public class SetTest {
             this.name = name;
         }
 
-//        @Override
-//        public boolean equals(Object o) {
-//            if (this == o) return true;
-//            if (!(o instanceof Person)) return false;
-//
-//            Person person = (Person) o;
-//
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Person)) return false;
+
+            Person person = (Person) o;
+
 //            if (key != person.key)
 //                return false;
-//            return name.equals(person.name);
-//
-//        }
-//
-//        @Override
-//        public int hashCode() {
-//            return name.hashCode();
-//        }
+            return name.equals(person.name);
+
+        }
+
+        @Override
+        public int hashCode() {
+            return key + name.hashCode();
+        }
     }
 }
